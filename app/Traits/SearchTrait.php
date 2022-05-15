@@ -12,7 +12,7 @@ trait SearchTrait {
 
     public function __construct()
     {
-        $this->baseURL = 'Https://api.github.com/';
+        $this->baseURL = 'https://api.github.com/';
     }
 
     public function createSearchObject($typeOfSearch, $name, $repos)
@@ -35,15 +35,21 @@ trait SearchTrait {
             );
         }
 
-        if(isset($searchSubject->SearchByRepos))
+        if(isset($searchSubject->searchByAllRepos))
         {
-            return $this->baseURL .
-                'users/' .
-                $searchSubject->name . '/' .
-                $searchSubject->repos;
             return $response = Http::get(
                 $this->baseURL .
                 'users/' .
+                $searchSubject->name . '/' .
+                'repos'
+            );
+        }
+
+        if(isset($searchSubject->SearchByRepos))
+        {
+            return $response = Http::get(
+                $this->baseURL .
+                'repos/' .
                 $searchSubject->name . '/' .
                 $searchSubject->repos
             );

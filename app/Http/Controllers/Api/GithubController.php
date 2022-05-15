@@ -10,16 +10,18 @@ use Illuminate\Support\Facades\Http;
 class GithubController extends Controller
 {
 
+    
     use SearchTrait;
-
-    public function search()
-    {
-        
-    }
 
     public function searchByName($nome)
     {
         $search = $this->createSearchObject('SearchByName', $nome, $repos = null);
+        return $searchResults = $this->searchGithub($search);
+    }
+
+    public function searchByAllRepos($nome)
+    {
+        $search = $this->createSearchObject('searchByAllRepos', $nome, $repos = null);
         return $searchResults = $this->searchGithub($search);
     }
 
