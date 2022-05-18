@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GithubController;
 use Illuminate\Support\Facades\Route;
 
 /*

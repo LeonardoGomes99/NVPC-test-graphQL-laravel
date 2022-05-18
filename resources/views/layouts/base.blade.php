@@ -12,6 +12,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="/js/jquery.min.js"></script>
     <script src="/js/index.js"></script>
+    <script src="/js/sweetalert2.js"></script>
 </head>
 <body id="page-top">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
