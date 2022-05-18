@@ -26,7 +26,7 @@ trait SearchTrait {
 
     public function searchGithub($searchSubject)
     {
-        if(isset($searchSubject->SearchByName))
+        if(isset($searchSubject->searchByName))
         {
             return $response = Http::get(
                 $this->baseURL .
@@ -45,13 +45,24 @@ trait SearchTrait {
             );
         }
 
-        if(isset($searchSubject->SearchByRepos))
+        if(isset($searchSubject->searchByRepos))
         {
             return $response = Http::get(
                 $this->baseURL .
                 'repos/' .
                 $searchSubject->name . '/' .
                 $searchSubject->repos
+            );
+        }
+
+        if(isset($searchSubject->searchByReposLanguages))
+        {
+            return $response = Http::get(
+                $this->baseURL .
+                'repos/' .
+                $searchSubject->name . '/' .
+                $searchSubject->repos . '/' .
+                'languages'
             );
         }
     }

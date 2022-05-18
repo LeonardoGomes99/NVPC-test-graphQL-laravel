@@ -28,5 +28,10 @@ Route::prefix('search')->group(function () {
     Route::get('/repos/all/{nome}', [GithubController::class, 'searchByAllRepos']);
 
     //buscar repositorio
-    Route::get('/repos/{nome}/{repos}', [GithubController::class, 'searchByRepos']);  
+    Route::get('/repos/{nome}/{repos}', [GithubController::class, 'searchByRepos']);
+    
+    //buscar linguagens usadas no repositorio
+    Route::get('/repos/languages/{nome}/{repos}', [GithubController::class, 'searchByReposLanguages']);
+
+    Route::get('/view', [GithubController::class, 'return_view']);
 });

@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Traits\SearchTrait;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Http;
 
 class GithubController extends Controller
 {
@@ -15,27 +13,34 @@ class GithubController extends Controller
     {
         $search = $this->createSearchObject('searchByName', $nome, $repos = null);
         $searchResults = $this->searchGithub($search);
-        return $searchResults;
+        return $this->return_view($searchResults);
     }
 
     public function searchByAllRepos($nome)
     {
         $search = $this->createSearchObject('searchByAllRepos', $nome, $repos = null);
         $searchResults = $this->searchGithub($search);
-        return $searchResults;
+        return $this->return_view($searchResults);
     }
 
     public function searchByRepos($nome, $repos)
     {
         $search = $this->createSearchObject('searchByRepos', $nome, $repos);
         $searchResults = $this->searchGithub($search);
-        return $searchResults;
+        return $this->return_view($searchResults);
     }
 
     public function searchByReposLanguages($nome, $repos)
     {
         $search = $this->createSearchObject('searchByReposLanguages', $nome, $repos);
         $searchResults = $this->searchGithub($search);
-        return $searchResults;
+        return $this->return_view($searchResults);
+    }
+
+    public function return_view($searchResults)
+    {
+        $data = json_decode($searchResults->getBody());
+        dd($data);
+        return view('results', ['resultsData' => $searchResults]);
     }
 }

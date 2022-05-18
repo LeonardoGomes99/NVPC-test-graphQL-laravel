@@ -14,5 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+Route::prefix('search')->group(function () {
+
+    //buscar usuario
+    Route::get('/user/{nome}', [GithubController::class, 'searchByName']);
+
+    //buscar todos os repositorios do usuario
+    Route::get('/repos/all/{nome}', [GithubController::class, 'searchByAllRepos']);
+
+    //buscar repositorio
+    Route::get('/repos/{nome}/{repos}', [GithubController::class, 'searchByRepos']);
+    
+    //buscar linguagens usadas no repositorio
+    Route::get('/repos/languages/{nome}/{repos}', [GithubController::class, 'searchByReposLanguages']);
+
+    Route::get('/view', [GithubController::class, 'return_view']);
 });
