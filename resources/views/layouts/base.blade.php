@@ -9,7 +9,7 @@
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <script src="/js/jquery.min.js"></script>
     <script src="/js/index.js"></script>
     <script src="/js/sweetalert2.js"></script>
