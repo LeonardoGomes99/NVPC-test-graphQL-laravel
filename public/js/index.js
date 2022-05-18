@@ -1,9 +1,17 @@
+var obj = [];
 $(document).ready(function(){
     $('#search_').click(function() {
-        check_inputs();
+        checkInputs();
     })
 
-    function check_inputs()
+    $('#filter_select').on('change', function() {
+        var filterKey = $(this).val();
+        organizeCards()
+        filter(filterKey)
+        reMount()
+    });
+
+    function checkInputs()
     {
         if(!$('#search_username').val()){alert('Por Favor Preencha o campo de Usuário');throw new Error('Por Favor Preencha o campo de Usuário');}
 
@@ -20,7 +28,7 @@ $(document).ready(function(){
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             url: url,
-            success: function(res) {
+            success: function(res) {                
                 $('#body_results').empty();
                 $('#body_results').html(res);
             },
@@ -30,4 +38,37 @@ $(document).ready(function(){
             async:false,
         });
     }
+
+    function organizeCards() 
+    {
+        obj = [];
+        $('#body_results div.div_parent_data').each((index, div)=>{
+
+            var item = $(div).data('infolistfilter');
+            item.html = div;
+            obj.push(item);
+
+        })
+    }
+
+    function filter(key) {
+        obj = obj.sort(function (a, b) {
+            if (a[key] === null) {return 1;}
+            if (b[key] === null) {return -1;}
+            if (a[key].toLowerCase() > b[key].toLowerCase()) {return 1;}
+            if (a[key].toLowerCase() < b[key].toLowerCase()) {return -1;}
+            return 0;
+        });
+    }
+
+
+
+    function reMount()
+    {
+        $('#body_results').empty();
+        $(obj).each(function(index,value){
+            $('#body_results').append(value.html);
+        })
+    }
+
 });

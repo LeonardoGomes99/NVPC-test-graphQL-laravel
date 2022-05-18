@@ -51,11 +51,9 @@
             <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
                 <div class="navbar-form navbar-left" action="/action_page.php">
                     <div class="input-group">
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Escolha Opção de Filtro</option>
-                            <option value="1">Ordem Alfabética</option>
-                            <option value="2">Linguagem</option>
-                            <option value="3">Descrição</option>
+                        <select id="filter_select" class="form-select" aria-label="Default select example">
+                            <option selected value="N">Ordem Alfabética</option>
+                            <option value="C">Commit</option>
                         </select>
                         <input type="text" class="form-control" placeholder="...">
                         <div class="input-group-btn">
