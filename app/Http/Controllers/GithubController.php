@@ -28,7 +28,7 @@ class GithubController extends Controller
     {
         $search = $this->createSearchObject('searchByRepos', $nome, $repos);
         $searchResults = $this->searchGithub($search);
-        return $this->return_view($searchResults, 'repos');
+        return $this->return_view($searchResults, 'repos-unique');
     }
 
     public function searchByReposLanguages($nome, $repos)
@@ -52,7 +52,7 @@ class GithubController extends Controller
         if($searchResults->getStatusCode() == '404')
         {
             return response()->json([
-                'message' => 'Usuário não encontrado'
+                'message' => 'Não encontrado'
             ], 404);
         }
         
@@ -61,7 +61,12 @@ class GithubController extends Controller
         { 
             return view('project_results', ['data' => $data]);
         }
-        else
+        elseif($type == 'repos-unique')
+        {
+            $data = [$data];
+            return view('project_results', ['data' => $data]);
+        }
+        elseif( $type == 'user')
         {
             return view('user_results', ['data' => $data]);
         }
